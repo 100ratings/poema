@@ -49,7 +49,7 @@ async function fetchNewValue() {
 }
 
 async function getGroqResponse(value) {
-    const promptValue = `Crie um poema de 8 versos sobre um(a) ${value}. Cada verso deve ser relativamente curto, em torno de 4-5 palavras. Não adicione mais nada à resposta. Somente o poema.`;
+    const promptValue = `Crie um poema de 8 versos sobre um(a) ${value}. Cada verso deve ser curto, com aproximadamente 4-5 palavras. O poema deve seguir o estilo de rap e todas as frases devem rimar.`;
     const options = {
         method: 'POST',
         headers: {

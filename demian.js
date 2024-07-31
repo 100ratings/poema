@@ -1,5 +1,5 @@
-const API_KEY = 'sk-proj-ZOvhypj3lM1ZefwkJPpBT3BlbkFJMOugpoZ8OQZOubprNfzu';
-const GPT4O_API = 'https://api.groq.com/openai/v1/chat/completions';
+const API_KEY = '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';
+const GROQ_API = 'https://api.groq.com/openai/v1/chat/completions';
 const VALUE_FETCH_API = 'https://11z.co/_w/5156/selection';
 let currentValue = '';
 
@@ -48,8 +48,8 @@ async function fetchNewValue() {
     }
 }
 
-async function getGPT4OResponse(value) {
-    const promptValue = `Crie uma letra de trap de 8 versos sobre ${value}, escrita em Português do Brasil. Cada verso deve ter entre 4 a 5 palavras e rimar com o próximo verso. A letra deve refletir claramente o tema escolhido, utilizando linguagem característica do gênero trap. Certifique-se de que os versos rimem da seguinte maneira: 1 com 2, 3 com 4, 5 com 6, e 7 com 8.`;
+async function getGroqResponse(value) {
+    const promptValue = `Crie um poema de 8 versos sobre um(a) ${value}. Cada verso deve ser relativamente curto, em torno de 4-5 palavras. Não adicione mais nada à resposta. Somente o poema.`;
     const options = {
         method: 'POST',
         headers: {
@@ -57,21 +57,21 @@ async function getGPT4OResponse(value) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'model': 'gpt-4o',
+            'model': 'llama3-8b-8192',
             'messages': [{'role': 'user', 'content': promptValue}]
         })
     };
     try {
-        const response = await fetch(GPT4O_API, options);
+        const response = await fetch(GROQ_API, options);
         const data = await response.json();
-        console.log('GPT-4o API Response:', data);
+        console.log('Groq API Response:', data);
         if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-            throw new Error('Unexpected response structure from GPT-4o API');
+            throw new Error('Unexpected response structure from Groq API');
         }
         const content = data.choices[0].message.content.trim();
         return content.split('\n').filter(line => line.trim() !== '').slice(0, 8);
     } catch (error) {
-        console.error('Error generating GPT-4o response:', error);
+        console.error('Error generating Groq response:', error);
         return ['Erro: Falha ao gerar resposta'];
     }
 }
@@ -106,8 +106,8 @@ async function checkForNewValue() {
         console.log('Fetched new value:', newValue);
         if (newValue && newValue !== currentValue && !newValue.toLowerCase().startsWith('http')) {
             currentValue = newValue;
-            const gpt4oResponse = await getGPT4OResponse(newValue);
-            updateText(gpt4oResponse);
+            const groqResponse = await getGroqResponse(newValue);
+            updateText(groqResponse);
         } else {
             console.log('No new non-HTTP value to process');
         }
@@ -129,7 +129,7 @@ async function init() {
         setInterval(checkForNewValue, 5000);
         window.addEventListener('resize', () => {
             if (currentValue) {
-                getGPT4OResponse(currentValue).then(updateText);
+                getGroqResponse(currentValue).then(updateText);
             }
         });
     } catch (error) {

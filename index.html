@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Novo Site</title>
+    <title>Poem</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        #container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
+        #image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo ao meu novo site!</h1>
-    <p>Este é um site de exemplo.</p>
+    <script type="text/javascript" src="NoSleep.js"></script>
+    <script type="text/javascript">
+        var noSleep = new NoSleep();
+        var nsEnabled = false;
+        document.addEventListener('click', function() {
+            if (!nsEnabled) {
+                nsEnabled = true;
+                noSleep.enable();
+            }
+        }, false);
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+    </script>
+    <div id="container">
+        <img id="image" src="notepad.webp" alt="Background Image">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <script src="demian.js"></script>
 </body>
 </html>

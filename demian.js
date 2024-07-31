@@ -72,7 +72,7 @@ async function getGroqResponse(value) {
         return content.split('\n').filter(line => line.trim() !== '').slice(0, 8);
     } catch (error) {
         console.error('Error generating Groq response:', error);
-        return ['Erro: Falha ao gerar resposta'];
+        return ['Error: Failed to generate response'];
     }
 }
 

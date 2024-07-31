@@ -49,7 +49,7 @@ async function fetchNewValue() {
 }
 
 async function getGPT4OResponse(value) {
-    const promptValue = `Crie uma letra de trap de 8 versos sobre ${value} que rime, escrita em Português do Brasil. Certifique-se de que cada verso tenha entre 4 a 5 palavras para manter o ritmo do trap e a rima. A letra deve refletir o tema escolhido de maneira clara e envolvente, utilizando uma linguagem característica do gênero trap. Certifique-se também de que os versos rimem entre si. Por favor, não adicione nada além da letra em sua resposta. Apenas a letra.`;
+    const promptValue = `Crie uma letra de trap de 8 versos sobre ${value}, escrita em Português do Brasil. Cada verso deve ter entre 4 a 5 palavras e rimar com o próximo verso. A letra deve refletir claramente o tema escolhido, utilizando linguagem característica do gênero trap. Certifique-se de que os versos rimem da seguinte maneira: 1 com 2, 3 com 4, 5 com 6, e 7 com 8.`;
     const options = {
         method: 'POST',
         headers: {
